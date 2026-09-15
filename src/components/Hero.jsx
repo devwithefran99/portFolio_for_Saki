@@ -14,10 +14,10 @@ const Hero = () => {
   const [isDeleting, setIsDeleting] = useState(false);
 
   const words = [
-    "Machine Learning",
-    "Deep Learning",
-    "AI Engineering",
-    "Computer Vision",
+    "Machine Learner",
+    "Deep Learner",
+    "AI Engineer",
+    "Computer Visioner",
   ];
 
   // Typing effect
@@ -69,6 +69,13 @@ const Hero = () => {
     },
   ];
 
+  const orbitBadges = [
+    { icon: FiCpu, label: "AI SYSTEM", angle: 0 },
+    { icon: FiActivity, label: "MODEL ACTIVE", angle: 90 },
+    { icon: FiCode, label: "NEURAL NET", angle: 180 },
+    { icon: FiLayers, label: "DATA FLOW", angle: 270 },
+  ];
+
   return (
     <section
       id="home"
@@ -86,42 +93,70 @@ const Hero = () => {
           <div className="relative flex justify-center lg:justify-start">
 
             {/* Outer 3D glow */}
-            <div className="absolute h-[300px] w-[300px] rounded-full bg-purple-600/20 blur-[90px] sm:h-[400px] sm:w-[400px]" />
+            <div className="absolute h-[220px] w-[220px] rounded-full bg-purple-600/20 blur-[70px] sm:h-[320px] sm:w-[320px] sm:blur-[90px] lg:h-[400px] lg:w-[400px]" />
 
             {/* Rotating orbit */}
-            <div className="absolute h-[300px] w-[300px] animate-spin rounded-full border border-purple-400/20 [animation-duration:12s] sm:h-[410px] sm:w-[410px]" />
+            <div className="absolute h-[220px] w-[220px] animate-spin rounded-full border border-purple-400/20 [animation-duration:12s] sm:h-[330px] sm:w-[330px] lg:h-[410px] lg:w-[410px]" />
 
-            <div className="absolute h-[260px] w-[260px] animate-[spin_8s_linear_infinite_reverse] rounded-full border border-indigo-400/10 sm:h-[360px] sm:w-[360px]" />
+            <div className="absolute h-[190px] w-[190px] animate-[spin_8s_linear_infinite_reverse] rounded-full border border-indigo-400/10 sm:h-[290px] sm:w-[290px] lg:h-[360px] lg:w-[360px]" />
 
             {/* Orbit dot */}
-            <div className="absolute left-[8%] top-[18%] h-3 w-3 animate-pulse rounded-full bg-purple-400 shadow-[0_0_20px_rgba(168,85,247,1)]" />
+            <div className="absolute left-[8%] top-[18%] h-2 w-2 animate-pulse rounded-full bg-purple-400 shadow-[0_0_20px_rgba(168,85,247,1)] sm:h-3 sm:w-3" />
 
-            {/* Image container */}
-            <div className="relative z-10 flex h-[350px] w-[350px] items-center justify-center sm:h-[440px] sm:w-[440px]">
+            {/* Image container — badges now live inside THIS so they share the same center as the image */}
+            <div className="relative z-10 flex h-[220px] w-[220px] items-center justify-center sm:h-[320px] sm:w-[320px] lg:h-[440px] lg:w-[440px]">
 
               {/* Glass circle behind image */}
               <div className="absolute inset-[12%] rounded-full border border-purple-400/20 bg-purple-500/[0.04] shadow-[inset_0_0_80px_rgba(168,85,247,0.08),0_0_80px_rgba(124,58,237,0.15)] backdrop-blur-sm" />
 
-              {/* Replace this image */}
               <img
                 src="/myImage.webp"
                 alt="ML Engineer"
                 className="relative z-10 h-full w-full object-contain drop-shadow-[0_0_35px_rgba(139,92,246,0.35)]"
+                style={{
+                  maskImage:
+                    "radial-gradient(circle at center, black 55%, transparent 85%)",
+                  WebkitMaskImage:
+                    "radial-gradient(circle at center, black 55%, transparent 85%)",
+                }}
               />
-            </div>
 
-            {/* Floating tech cards */}
-            <div className="absolute left-0 top-[18%] hidden rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2 backdrop-blur-xl sm:block">
-              <div className="flex items-center gap-2">
-                <FiCpu className="text-purple-400" size={14} />
-                <span className="text-[10px] text-white/60">AI SYSTEM</span>
-              </div>
-            </div>
-
-            <div className="absolute bottom-[18%] right-0 hidden rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2 backdrop-blur-xl sm:block">
-              <div className="flex items-center gap-2">
-                <FiActivity className="text-fuchsia-400" size={14} />
-                <span className="text-[10px] text-white/60">MODEL ACTIVE</span>
+              {/* Orbiting badges */}
+              <div className="pointer-events-none absolute inset-0">
+                {orbitBadges.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <div
+                      key={item.label}
+                      className="absolute left-1/2 top-1/2 h-0 w-0"
+                      style={{
+                        "--angle": `${item.angle}deg`,
+                        animation: "orbit-spin 18s linear infinite",
+                      }}
+                    >
+                      <div
+                        className="absolute"
+                        style={{
+                          transform:
+                            "translateX(clamp(95px, 26vw, 190px)) translateY(-50%)",
+                        }}
+                      >
+                        <div
+                          className="flex items-center gap-1.5 whitespace-nowrap rounded-lg border border-white/10 bg-white/[0.04] px-2 py-1 backdrop-blur-xl sm:gap-2 sm:rounded-xl sm:px-3 sm:py-2"
+                          style={{
+                            "--angle": `${item.angle}deg`,
+                            animation: "orbit-counter-spin 18s linear infinite",
+                          }}
+                        >
+                          <Icon className="h-2.5 w-2.5 text-purple-400 sm:h-3.5 sm:w-3.5" />
+                          <span className="text-[8px] text-white/60 sm:text-[10px]">
+                            {item.label}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -142,10 +177,10 @@ const Hero = () => {
               Hello, I'm
             </p>
 
-            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
-              Your Name
-              <span className="text-purple-400">.</span>
-            </h1>
+            <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
+  Sharafat Alam Saki
+  <span className="text-purple-400">.</span>
+</h1>
 
             {/* Typing text */}
             <div className="mt-4 min-h-[52px] text-2xl font-semibold sm:text-3xl">

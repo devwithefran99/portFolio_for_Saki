@@ -176,3 +176,13 @@ body::after {
     transform: translateX(10%);
   }
 }
+
+@keyframes orbit-spin {
+  from { transform: rotate(var(--angle)); }
+  to   { transform: rotate(calc(var(--angle) + 360deg)); }
+}
+
+@keyframes orbit-counter-spin {
+  from { transform: rotate(calc(-1 * var(--angle))); }
+  to   { transform: rotate(calc(-1 * var(--angle) - 360deg)); }
+}
