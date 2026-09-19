@@ -48,9 +48,9 @@ const Education = () => {
 
   const certificates = [
     {
-      title: "Machine Learning Certification",
+      title: "Certified From Creative IT",
       issuer: "Certification Provider",
-      image: "/certificates/certificate-1.jpg",
+      image: "/CreativeIT.jpeg",
       category: "Machine Learning",
     },
     {

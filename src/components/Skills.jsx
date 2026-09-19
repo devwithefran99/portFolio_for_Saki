@@ -83,7 +83,7 @@ const Skills = () => {
   return (
     <section
       id="skills"
-      className="relative overflow-hidden px-4 py-24 sm:px-6 lg:px-8"
+      className="relative overflow-hidden px-4 mt-20 mb-10 sm:px-6 lg:px-8"
     >
       {/* Ambient Glow */}
       <div className="pointer-events-none absolute left-[10%] top-[10%] h-72 w-72 rounded-full bg-indigo-600/10 blur-[120px]" />

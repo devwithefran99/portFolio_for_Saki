@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   FiMenu,
   FiX,
@@ -7,14 +7,42 @@ import {
 
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
 
   const navLinks = [
     { name: "Home", href: "#home" },
     { name: "Skills", href: "#skills" },
-    { name: "About", href: "#about" },
     { name: "Projects", href: "#projects" },
+    { name: "About", href: "#about" },
     { name: "Contact", href: "#contact" },
   ];
+
+  // ---- Track which section is currently in view ----
+  useEffect(() => {
+    const sectionIds = navLinks.map((link) => link.href.replace("#", ""));
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      {
+        // navbar height-এর জন্য offset, section-টা মাঝ বরাবর আসলে active ধরবে
+        rootMargin: "-45% 0px -50% 0px",
+        threshold: 0,
+      }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => sections.forEach((section) => observer.unobserve(section));
+  }, []);
 
   return (
     <>
@@ -41,34 +69,14 @@ const Nav = () => {
                 className="group flex items-center gap-3"
               >
                 {/* Logo Image */}
-                <div
-                  className="
-                    flex h-10 w-10 items-center justify-center
-                    overflow-hidden rounded-xl
-                    border border-purple-400/30
-                    bg-purple-500/10
-                    shadow-[0_0_20px_rgba(168,85,247,0.15)]
-                  "
-                >
-                  {/* 
-                    তোমার logo এখানে বসাবে:
-
+                <div className="w-30">
                     <img
-                      src="/images/logo.png"
+                      src="/myLogo.png"
                       alt="Logo"
                       className="h-full w-full object-cover"
                     />
-                  */}
-
-                  <span className="text-[9px] font-medium text-white/40">
-                    LOGO
-                  </span>
                 </div>
 
-                <span className="hidden text-sm font-semibold text-white sm:block">
-                  ML<span className="text-purple-400">.</span>
-                  Engineer
-                </span>
               </a>
             </div>
 
@@ -83,24 +91,27 @@ const Nav = () => {
                 lg:flex
               "
             >
-              {navLinks.map((link, index) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className={`
-                    rounded-lg px-4 py-2
-                    text-xs font-medium
-                    transition-all duration-300
-                    ${
-                      index === 0
-                        ? "bg-purple-500 text-white shadow-lg shadow-purple-500/20"
-                        : "text-white/55 hover:bg-purple-500/10 hover:text-white"
-                    }
-                  `}
-                >
-                  {link.name}
-                </a>
-              ))}
+              {navLinks.map((link) => {
+                const isActive = activeSection === link.href.replace("#", "");
+                return (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    className={`
+                      rounded-lg px-4 py-2
+                      text-xs font-medium
+                      transition-all duration-300
+                      ${
+                        isActive
+                          ? "bg-purple-500 text-white shadow-lg shadow-purple-500/20"
+                          : "text-white/55 hover:bg-purple-500/10 hover:text-white"
+                      }
+                    `}
+                  >
+                    {link.name}
+                  </a>
+                );
+              })}
             </nav>
 
             {/* Right Side */}
@@ -205,24 +216,15 @@ const Nav = () => {
           <div className="flex items-center justify-between border-b border-white/10 p-5">
 
             <div className="flex items-center gap-3">
-              <div
-                className="
-                  flex h-10 w-10 items-center justify-center
-                  overflow-hidden rounded-xl
-                  border border-purple-400/30
-                  bg-purple-500/10
-                "
-              >
-                {/* Mobile Logo */}
-                <span className="text-[9px] text-white/40">
-                  LOGO
-                </span>
-              </div>
+              <div className="w-25">
+                    <img
+                      src="/myLogo.png"
+                      alt="Logo"
+                      className="h-full w-full object-cover"
+                    />
+                </div>
 
-              <span className="text-sm font-semibold text-white">
-                ML<span className="text-purple-400">.</span>
-                Engineer
-              </span>
+              
             </div>
 
             {/* Close */}
@@ -242,32 +244,35 @@ const Nav = () => {
 
           {/* Sidebar Links */}
           <nav className="flex flex-col gap-2 p-5">
-            {navLinks.map((link, index) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className={`
-                  group flex items-center justify-between
-                  rounded-xl
-                  border border-transparent
-                  px-4 py-3.5
-                  text-sm
-                  transition-all duration-300
-                  ${
-                    index === 0
-                      ? "border-purple-500/20 bg-purple-500/10 text-white"
-                      : "text-white/55 hover:border-purple-500/20 hover:bg-purple-500/10 hover:text-white"
-                  }
-                `}
-              >
-                <span>{link.name}</span>
+            {navLinks.map((link, index) => {
+              const isActive = activeSection === link.href.replace("#", "");
+              return (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setIsOpen(false)}
+                  className={`
+                    group flex items-center justify-between
+                    rounded-xl
+                    border border-transparent
+                    px-4 py-3.5
+                    text-sm
+                    transition-all duration-300
+                    ${
+                      isActive
+                        ? "border-purple-500/20 bg-purple-500/10 text-white"
+                        : "text-white/55 hover:border-purple-500/20 hover:bg-purple-500/10 hover:text-white"
+                    }
+                  `}
+                >
+                  <span>{link.name}</span>
 
-                <span className="text-[10px] text-white/20 transition-colors group-hover:text-purple-400">
-                  0{index + 1}
-                </span>
-              </a>
-            ))}
+                  <span className="text-[10px] text-white/20 transition-colors group-hover:text-purple-400">
+                    0{index + 1}
+                  </span>
+                </a>
+              );
+            })}
           </nav>
 
           {/* Sidebar Bottom */}

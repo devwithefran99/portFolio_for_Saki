@@ -48,17 +48,17 @@ const Hero = () => {
 
   const features = [
     {
-      value: "10+",
+      value: "3+",
       label: "Projects",
       icon: FiCode,
     },
     {
-      value: "30+",
+      value: "25+",
       label: "Technologies",
       icon: FiCpu,
     },
     {
-      value: "5+",
+      value: "3+",
       label: "ML Models",
       icon: FiLayers,
     },
@@ -79,7 +79,7 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen overflow-hidden px-4 pt-28 sm:px-6 lg:px-8"
+      className="relative  overflow-hidden px-4 pt-28 sm:px-6 lg:px-8"
     >
       {/* Ambient Glow */}
       <div className="pointer-events-none absolute left-[5%] top-[15%] h-72 w-72 rounded-full bg-purple-600/15 blur-[120px]" />
