@@ -130,7 +130,7 @@ const About = () => {
               {/* Image */}
               <div className="relative z-10 flex h-[270px] w-[270px] items-end justify-center">
                 <img
-                  src="/myImage.webp"
+                  src="/aboutImg.png"
                   alt="Sharafat Alam Saki"
                   className="
                     h-full

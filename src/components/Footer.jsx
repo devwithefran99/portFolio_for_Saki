@@ -1,6 +1,5 @@
 import {
   FiArrowUp,
-  FiArrowUpRight,
   FiCpu,
   FiGithub,
   FiLinkedin,
@@ -125,30 +124,15 @@ const Footer = () => {
             <div className="flex items-center gap-3">
 
               {/* Logo */}
-              <div
-                className="
-                  flex h-11 w-11 items-center justify-center
-                  overflow-hidden rounded-xl
-                  border border-purple-400/20
-                  bg-purple-500/[0.07]
-                  shadow-[0_0_25px_rgba(139,92,246,0.1)]
-                "
-              >
-                {/* Replace with your logo */}
-                <span className="text-[9px] font-medium text-white/30">
-                  LOGO
-                </span>
-              </div>
 
-              <div>
-                <h3 className="text-sm font-bold text-white">
-                  ML<span className="text-purple-400">.</span>Engineer
-                </h3>
 
-                <p className="mt-0.5 text-[9px] uppercase tracking-[2px] text-white/20">
-                  Intelligent Systems
-                </p>
-              </div>
+              <div className="w-30">
+                    <img
+                      src="/myLogo.png"
+                      alt="Logo"
+                      className="h-full w-full object-cover"
+                    />
+                </div>
 
             </div>
 
@@ -161,7 +145,8 @@ const Footer = () => {
             <div className="mt-6 flex gap-2">
 
               <a
-                href="#"
+                  href="https://github.com/MuhammadSharafat"
+               
                 aria-label="GitHub"
                 className="
                   rounded-xl border border-white/10
@@ -178,7 +163,7 @@ const Footer = () => {
               </a>
 
               <a
-                href="#"
+                href="https://www.linkedin.com/in/muhammad-sharafat-alam-730450437/?skipRedirect=true"
                 aria-label="LinkedIn"
                 className="
                   rounded-xl border border-white/10
@@ -195,7 +180,7 @@ const Footer = () => {
               </a>
 
               <a
-                href="mailto:your@email.com"
+                href="mailto:muhammadsharafatalam@gmail.com"
                 aria-label="Email"
                 className="
                   rounded-xl border border-white/10
